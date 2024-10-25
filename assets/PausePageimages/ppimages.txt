@@ -1,0 +1,1 @@
+This folder contains the images that have tobe used in the PausePage.java
