@@ -1,0 +1,1 @@
+This folder contains the images that are to be used in Level_1.java
