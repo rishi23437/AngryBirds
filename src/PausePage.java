@@ -1,12 +1,12 @@
 package io.github.angry_birds;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
@@ -48,23 +48,23 @@ public class PausePage implements Screen {
 
         resumebuttonTexture = new Texture("PausePageimages/resumebutton.png");
         resumebutton = new ImageButton(new TextureRegionDrawable(new TextureRegion(resumebuttonTexture)));
-        resumebutton.setPosition(10, 340);
-        resumebutton.setSize(30, 30);
+        resumebutton.setPosition(10, 330);
+        resumebutton.setSize(40, 40);
 
         restartbuttonTexture = new Texture("PausePageimages/restartbutton.png");
         restartbutton = new ImageButton(new TextureRegionDrawable(new TextureRegion(restartbuttonTexture)));
-        restartbutton.setPosition(10, 300);
-        restartbutton.setSize(30, 30);
+        restartbutton.setPosition(10, 285);
+        restartbutton.setSize(40, 40);
 
         exitbuttonTexture = new Texture("PausePageimages/exitbutton.png");
         exitbutton = new ImageButton(new TextureRegionDrawable(new TextureRegion(exitbuttonTexture)));
-        exitbutton.setPosition(10, 260);
-        exitbutton.setSize(30, 30);
+        exitbutton.setPosition(10, 240);
+        exitbutton.setSize(40, 40);
 
         returntohomebuttonTexture = new Texture("PausePageimages/returntohomebutton.png");
         returntohomebutton = new ImageButton(new TextureRegionDrawable(new TextureRegion(returntohomebuttonTexture)));
-        returntohomebutton.setPosition(10, 220);
-        returntohomebutton.setSize(30, 30);
+        returntohomebutton.setPosition(10, 195);
+        returntohomebutton.setSize(40, 40);
 
         stage.addActor(resumebutton);
         stage.addActor(restartbutton);
@@ -117,7 +117,7 @@ public class PausePage implements Screen {
 
         if (exitbutton.isPressed()) {
             // Switch to PauseButton class
-            game.setScreen(new LevelPage(game));
+            game.setScreen(new LevelScreen(game));
         }
 
         if (returntohomebutton.isPressed()) {
