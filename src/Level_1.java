@@ -1,6 +1,7 @@
 package io.github.angry_birds;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
@@ -110,6 +111,16 @@ public class Level_1 implements Screen {
         if (pausebutton.isPressed()) {
             // Switch to PauseButton class
             game.setScreen(new PausePage(game));
+        }
+
+        if (Gdx.input.isKeyJustPressed(Input.Keys.ENTER)) {
+            // Set the screen to VictoryScreen
+            game.setScreen(new Victory_Screen(game));
+        }
+
+        if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
+            // Set the screen to VictoryScreen
+            game.setScreen(new Lost_Screen(game));
         }
     }
 
