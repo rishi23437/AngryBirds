@@ -113,6 +113,11 @@ public class Level_1 implements Screen {
             game.setScreen(new PausePage(game));
         }
 
+        /*
+        For STATIC GUI:
+        1. ENTER: WIN
+        2. SPACE: LOSS
+        */
         if (Gdx.input.isKeyJustPressed(Input.Keys.ENTER)) {
             // Set the screen to VictoryScreen
             game.setScreen(new Victory_Screen(game));
