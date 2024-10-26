@@ -4,7 +4,6 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
@@ -19,6 +18,8 @@ public class HomePage implements Screen {
     private Stage stage;                        // to manage buttons and input
 
     private Texture background;                // texture: keeps images in video ram
+    private Texture header;
+    private Texture red_bird_image;
 
     private Texture play_image;
     private ImageButton play_button;
@@ -35,6 +36,8 @@ public class HomePage implements Screen {
         // show just loads into memory, render displays it
         batch = new SpriteBatch();
         background = new Texture("home_page.png");
+        header = new Texture("angry_birds_text.png");
+        red_bird_image = new Texture("red_bird.png");
         viewport = new FitViewport(640, 380);
 
         stage = new Stage(viewport, batch);
@@ -42,17 +45,15 @@ public class HomePage implements Screen {
 
         // Play button
         play_image = new Texture("play_button.png");
-        TextureRegionDrawable region1 = new TextureRegionDrawable(new TextureRegion(play_image));
-        play_button = new ImageButton(region1);
-        play_button.setPosition(290, 265);
-        play_button.setSize(60, 40);
+        play_button = new ImageButton(new TextureRegionDrawable(play_image));
+        play_button.setPosition(270, 215);                           // around 320, 245
+        play_button.setSize(100, 60);
 
         // Quit button
-        quit_image = new Texture("libgdx.png");        // CHANGE TO QUIT_BUTTON.PNG LATER
-        TextureRegionDrawable region2 = new TextureRegionDrawable(new TextureRegion(quit_image));
-        quit_button = new ImageButton(region2);
-        quit_button.setPosition(290, 235);
-        quit_button.setSize(60, 40);
+        quit_image = new Texture("quit_button.png");        // CHANGE TO QUIT_BUTTON.PNG LATER
+        quit_button = new ImageButton(new TextureRegionDrawable(quit_image));
+        quit_button.setPosition(270, 165);                              // around y: 190(center)
+        quit_button.setSize(100, 60);
 
         stage.addActor(play_button);
         stage.addActor(quit_button);
@@ -72,16 +73,19 @@ public class HomePage implements Screen {
 
         batch.begin();
         batch.draw(background, 0, 0, world_width, world_height);
-        // batch.draw(play_image, 290, 265, 60, 40);         // these should be the COORDS OF CENTER OF BUTTON
+        batch.draw(header, 220, 300, 200, 60);                   // around 320, 330
+        batch.draw(red_bird_image, 230, 28, 160, 100);
         batch.end();
 
         stage.act(delta);                                               // for buttons
         stage.draw();
 
+        // play button function
         if (play_button.isPressed()) {
-            // Switch to LevelPage class
-            game.setScreen((Screen) new LevelPage(game));
+            // Switch to LevelScreen class
+            game.setScreen((Screen) new LevelScreen(game));
         }
+        // quit button function
         if (quit_button.isPressed()) {
             // Quit Application
             Gdx.app.exit();

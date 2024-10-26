@@ -15,7 +15,7 @@ public class MainGame extends Game {
     // create(): load/initialize assets
 
     public void create() {
-        setScreen((Screen) new HomePage(this)); // setting initial screen to home page rn, later switch to LOGIN/SIGNUP
+        setScreen((Screen) new LoadingScreen(this)); // setting initial screen to loading screen rn
     }
     public void render() {
         super.render();
