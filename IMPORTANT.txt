@@ -4,3 +4,7 @@ Completed HomePage. Things to keep in mind:
 1. LevelPage right now is just a template, and contains only the aspects needed for HomePage to function
 2. Will change background image
 3. Will change quit button image after deciding which template(or some image from the net) to use
+
+
+Utilities Folder:
+Not required in code, just contains some UI components which may be useful for creating other components
