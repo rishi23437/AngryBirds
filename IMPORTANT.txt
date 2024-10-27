@@ -5,6 +5,30 @@ Completed HomePage. Things to keep in mind:
 2. Will change background image
 3. Will change quit button image after deciding which template(or some image from the net) to use
 
+Completed LevelScreen.Things to keep in mind:
+1. This screen renders icons which when clicked sends us to that particular levels individual screen 
+2. It also has a back button which sends us to HomePage.
+
+Completed Level_1 Screen. Things to keep in mind:
+1. This screen renders the 1st level, currently it is just static.
+2. It also renders Pause button that forwards us to PausePage.
+
+Completed LoadingScreen. Things to keep in mind:
+1. This Screen renders a loading screen for 5 sec, after which it then renders the LevelScreen.
+
+Completed Lost_Screen. Things to keep in mind:
+1. This Screen is rendered when space bar us pressed in Level_1 currently, signifying that the user has lost.
+2. This screen also renders 2 buttons (restart button or exit button which sends the user to LevelScreen).
+
+Completed Victory_Screen. Things to keep in mind:
+1. This Screen is rendered when enter ket is pressed in Level_1 currently, signifying that the user has won the level.
+2. This screen also renders 3 buttons (restart button or exit button which sends the user to LevelScreen and a nextLevel button that sends the user to next level).
+
+Completed MainGane. Things to keep in mind:
+1. This page initiates the call of rendering the GUI and renders the loading page.
+
+Completed PausePage. Things to keep in mind:
+1. This page is rendered when the pause button is pressed in any level it pauses the game and offers option like resuming the game, restarting the game, exiting the game or even returning to homepage with various button on the left side.
 
 Utilities Folder:
 Not required in code, just contains some UI components which may be useful for creating other components
