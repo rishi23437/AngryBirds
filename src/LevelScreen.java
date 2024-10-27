@@ -19,6 +19,7 @@ public class LevelScreen implements Screen{
     private FitViewport viewport;                               // viewable window size
 
     private Texture background;
+    private Texture map_text;
 
     private Texture back_image;
     private ImageButton back_button;
@@ -43,6 +44,7 @@ public class LevelScreen implements Screen{
         Gdx.input.setInputProcessor(stage);
 
         background = new Texture("level_screen.png");
+        map_text = new Texture("map_brown.png");
 
         // Back button
         back_image = new Texture("back_button.png");
@@ -89,6 +91,7 @@ public class LevelScreen implements Screen{
 
         batch.begin();
         batch.draw(background, 0, 0, world_width, world_height);
+        batch.draw(map_text, 280, 300, 80, 40);                    // around 320, 320
         batch.end();
 
         stage.act(delta);
