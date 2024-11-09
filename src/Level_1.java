@@ -32,8 +32,11 @@ public class Level_1 implements Screen {
     private Viewport viewport;
     private final MainGame game;
 
-    public Level_1(MainGame game) {
-        this.game = game;  // Store the reference to MainGame
+    private Player current_player;
+
+    public Level_1(MainGame game, Player player) {
+        this.game = game;                           // Store the reference to MainGame
+        this.current_player = player;
     }
 
     @Override
@@ -110,7 +113,7 @@ public class Level_1 implements Screen {
 
         if (pausebutton.isPressed()) {
             // Switch to PauseButton class
-            game.setScreen(new PausePage(game));
+            game.setScreen(new PausePage(game, current_player));
         }
 
         /*
@@ -120,12 +123,12 @@ public class Level_1 implements Screen {
         */
         if (Gdx.input.isKeyJustPressed(Input.Keys.ENTER)) {
             // Set the screen to VictoryScreen
-            game.setScreen(new Victory_Screen(game));
+            game.setScreen(new Victory_Screen(game, current_player));
         }
 
         if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
             // Set the screen to VictoryScreen
-            game.setScreen(new Lost_Screen(game));
+            game.setScreen(new Lost_Screen(game, current_player));
         }
     }
 

@@ -27,8 +27,12 @@ public class HomePage implements Screen {
     private Texture quit_image;
     private ImageButton quit_button;
 
-    public HomePage(MainGame game) {
+    private Player current_player;
+
+
+    public HomePage(MainGame game, Player player) {
         this.game = game;
+        current_player = player;
     }
 
     @Override
@@ -83,7 +87,7 @@ public class HomePage implements Screen {
         // play button function
         if (play_button.isPressed()) {
             // Switch to LevelScreen class
-            game.setScreen((Screen) new LevelScreen(game));
+            game.setScreen((Screen) new LevelScreen(game, current_player));
         }
         // quit button function
         if (quit_button.isPressed()) {

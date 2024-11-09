@@ -15,7 +15,7 @@ public class MainGame extends Game {
     // create(): load/initialize assets
 
     public void create() {
-        setScreen((Screen) new LoadingScreen(this)); // setting initial screen to loading screen rn
+        setScreen((Screen) new LoadingScreen(this)); // setting initial screen to loading screen
     }
     public void render() {
         super.render();

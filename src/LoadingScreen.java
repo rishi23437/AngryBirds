@@ -43,7 +43,7 @@ public class LoadingScreen implements Screen {
         if (time_elapsed >= 3) {
             // Switching to HomePage after 3 seconds
             // NOTE: later switch to LOGIN/SIGNUP, then go to home page.
-            game.setScreen((Screen) new HomePage(game));
+            game.setScreen((Screen) new SignIn(game));
         }
     }
 

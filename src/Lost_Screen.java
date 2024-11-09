@@ -31,8 +31,11 @@ public class Lost_Screen implements Screen {
     private Texture exitbuttonTexture;
     private ImageButton exitbutton;
 
-    public Lost_Screen(MainGame game) {
+    private Player current_player;
+
+    public Lost_Screen(MainGame game, Player player) {
         this.game = game;
+        this.current_player = player;
     }
 
     @Override
@@ -95,12 +98,12 @@ public class Lost_Screen implements Screen {
 
         if (exitbutton.isPressed()) {
             // Switch to PauseButton class
-            game.setScreen(new LevelScreen(game));
+            game.setScreen(new LevelScreen(game, current_player));
         }
 
         if (restartbutton.isPressed()) {
             // Switch to PauseButton class
-            game.setScreen(new Level_1(game));
+            game.setScreen(new Level_1(game, current_player));
         }
     }
 

@@ -32,9 +32,12 @@ public class PausePage implements Screen {
     private Texture returntohomebuttonTexture;
     private ImageButton returntohomebutton;
 
+    private Player current_player;
 
-    public PausePage(MainGame game) {
+
+    public PausePage(MainGame game, Player player) {
         this.game = game;
+        this.current_player = player;
     }
 
     @Override
@@ -107,22 +110,22 @@ public class PausePage implements Screen {
 
         if (resumebutton.isPressed()) {
             // Switch to PauseButton class
-            game.setScreen(new Level_1(game));
+            game.setScreen(new Level_1(game, current_player));
         }
 
         if (restartbutton.isPressed()) {
             // Switch to PauseButton class
-            game.setScreen(new Level_1(game));
+            game.setScreen(new Level_1(game, current_player));
         }
 
         if (exitbutton.isPressed()) {
             // Switch to PauseButton class
-            game.setScreen(new LevelScreen(game));
+            game.setScreen(new LevelScreen(game, current_player));
         }
 
         if (returntohomebutton.isPressed()) {
             // Switch to PauseButton class
-            game.setScreen(new HomePage(game));
+            game.setScreen(new HomePage(game, current_player));
         }
     }
 

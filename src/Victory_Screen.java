@@ -36,9 +36,11 @@ public class Victory_Screen implements Screen {
     private Texture nextbuttonTexture;
     private ImageButton nextbutton;
 
+    private Player current_player;
 
-    public Victory_Screen (MainGame game) {
+    public Victory_Screen (MainGame game, Player player) {
         this.game = game;
+        this.current_player = player;
     }
 
     @Override
@@ -114,17 +116,17 @@ public class Victory_Screen implements Screen {
 
         if (exitbutton.isPressed()) {
             // Switch to PauseButton class
-            game.setScreen(new LevelScreen(game));
+            game.setScreen(new LevelScreen(game, current_player));
         }
 
         if (restartbutton.isPressed()) {
             // Switch to PauseButton class
-            game.setScreen(new Level_1(game));
+            game.setScreen(new Level_1(game, current_player));
         }
 
         if (nextbutton.isPressed()) {
             // Switch to NextButton class
-            game.setScreen(new Level_1(game));
+            game.setScreen(new Level_1(game, current_player));
         }
     }
 

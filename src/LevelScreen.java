@@ -31,8 +31,11 @@ public class LevelScreen implements Screen{
     private ImageButton level2_button;
     private ImageButton level3_button;
 
-    public LevelScreen(MainGame game) {
+    private Player current_player;
+
+    public LevelScreen(MainGame game, Player player) {
         this.game = game;
+        this.current_player = player;
     }
 
     @Override
@@ -101,12 +104,12 @@ public class LevelScreen implements Screen{
         // Back button is pressed
         if (back_button.isPressed()) {
             // switching back to the previous screen(HomePage)
-            game.setScreen((Screen) new HomePage(game));
+            game.setScreen((Screen) new HomePage(game, current_player));
         }
         // Level 1 is pressed
         else if (level1_button.isPressed()) {
             // switching to Level 1
-            game.setScreen((Screen) new Level_1(game));
+            game.setScreen((Screen) new Level_1(game, current_player));
         }
 
     }
