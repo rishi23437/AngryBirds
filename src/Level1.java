@@ -7,7 +7,6 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
@@ -16,7 +15,7 @@ import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
-public class Level_1 implements Screen {
+public class Level1 implements Screen {
     private SpriteBatch batch;
 
     private Texture backgroundTexture;
@@ -34,7 +33,7 @@ public class Level_1 implements Screen {
 
     private Player current_player;
 
-    public Level_1(MainGame game, Player player) {
+    public Level1(MainGame game, Player player) {
         this.game = game;                           // Store the reference to MainGame
         this.current_player = player;
     }
@@ -123,12 +122,12 @@ public class Level_1 implements Screen {
         */
         if (Gdx.input.isKeyJustPressed(Input.Keys.ENTER)) {
             // Set the screen to VictoryScreen
-            game.setScreen(new Victory_Screen(game, current_player));
+            game.setScreen(new VictoryScreen(game, current_player));
         }
 
         if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
             // Set the screen to VictoryScreen
-            game.setScreen(new Lost_Screen(game, current_player));
+            game.setScreen(new LostScreen(game, current_player));
         }
     }
 

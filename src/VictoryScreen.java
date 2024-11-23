@@ -15,7 +15,7 @@ import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
-public class Victory_Screen implements Screen {
+public class VictoryScreen implements Screen {
 
     private final MainGame game;
     private SpriteBatch batch;
@@ -38,7 +38,7 @@ public class Victory_Screen implements Screen {
 
     private Player current_player;
 
-    public Victory_Screen (MainGame game, Player player) {
+    public VictoryScreen(MainGame game, Player player) {
         this.game = game;
         this.current_player = player;
     }
@@ -121,12 +121,12 @@ public class Victory_Screen implements Screen {
 
         if (restartbutton.isPressed()) {
             // Switch to PauseButton class
-            game.setScreen(new Level_1(game, current_player));
+            game.setScreen(new Level1(game, current_player));
         }
 
         if (nextbutton.isPressed()) {
             // Switch to NextButton class
-            game.setScreen(new Level_1(game, current_player));
+            game.setScreen(new Level1(game, current_player));
         }
     }
 

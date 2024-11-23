@@ -15,7 +15,7 @@ import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
-public class Lost_Screen implements Screen {
+public class LostScreen implements Screen {
     private final MainGame game;
     private SpriteBatch batch;
     private Viewport viewport;
@@ -33,7 +33,7 @@ public class Lost_Screen implements Screen {
 
     private Player current_player;
 
-    public Lost_Screen(MainGame game, Player player) {
+    public LostScreen(MainGame game, Player player) {
         this.game = game;
         this.current_player = player;
     }
@@ -103,7 +103,7 @@ public class Lost_Screen implements Screen {
 
         if (restartbutton.isPressed()) {
             // Switch to PauseButton class
-            game.setScreen(new Level_1(game, current_player));
+            game.setScreen(new Level1(game, current_player));
         }
     }
 
