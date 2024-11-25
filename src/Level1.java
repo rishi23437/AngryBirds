@@ -4,9 +4,12 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
@@ -15,41 +18,64 @@ import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
-public class Level1 implements Screen {
+import java.util.LinkedList;
+
+public class Level1 extends Level implements Screen {
     private SpriteBatch batch;
 
     private Texture backgroundTexture;
-    private Texture slingshotTexture;
     private Texture redbirdTexture;
     private Texture kingpigTexture;
     private Texture woodblockTexture;
 
     private Stage stage;
+    private Viewport viewport;
+    private OrthographicCamera camera;
+
     private Texture pausebuttonTexture;
     private ImageButton pausebutton;
 
-    private Viewport viewport;
     private final MainGame game;
 
     private Player current_player;
 
-    public Level1(MainGame game, Player player) {
+    private World world;
+
+    // FOR TESTING, CREATING A BIRD OBJECT
+    private Bird bird;
+
+
+    public Level1(MainGame game, Player player, World world, Slingshot slingshot) {
         this.game = game;                           // Store the reference to MainGame
         this.current_player = player;
+        this.world = world;
+        this.slingshot = slingshot;
     }
 
     @Override
     public void show() {
         batch = new SpriteBatch();
         backgroundTexture = new Texture("Level_1images/Background1.png");
-        slingshotTexture = new Texture("Level_1images/slingshot.png");
         redbirdTexture = new Texture("Level_1images/redBird.png");
         woodblockTexture = new Texture("Level_1images/woodblock.png");
         kingpigTexture = new Texture("Level_1images/kingpig.png");
-        viewport = new FitViewport(640, 380);
+
+        camera = new OrthographicCamera();
+        viewport = new FitViewport(640, 380, camera);
 
         stage = new Stage(viewport, batch);
         Gdx.input.setInputProcessor(stage);
+
+
+
+        // TESTING
+        birds = new LinkedList<Bird>();
+        this.setBirds();
+        slingshot.setBird_list(birds);
+        bird = slingshot.getCurrent_bird();
+        create_ground(world, camera);
+        bird.create(world);
+
 
         pausebuttonTexture = new Texture("Level_1images/pausebutton.png");
         pausebutton = new ImageButton(new TextureRegionDrawable(new TextureRegion(pausebuttonTexture)));
@@ -65,6 +91,8 @@ public class Level1 implements Screen {
         ScreenUtils.clear(Color.BLACK);
         viewport.apply();
         batch.setProjectionMatrix(viewport.getCamera().combined);
+
+        world.step(1/60f, 6, 2);
 
         // Check for input and print cursor location
 //        if (Gdx.input.isTouched()) {
@@ -86,13 +114,13 @@ public class Level1 implements Screen {
         batch.draw(backgroundTexture, 0, 0, world_width, world_height);
 
         // Define the slingshot position and size
-        float slingshotX = 125;
-        float slingshotY = 55;
-        float slingshotHeight = 75;
-        float slingshotWidth = slingshotTexture.getWidth() * (slingshotHeight / slingshotTexture.getHeight()); // Scale width based on height
+        float slingshotX = Slingshot.anchor_pointX;
+        float slingshotY = Slingshot.anchor_pointY;
+        float slingshotHeight = Slingshot.height;
+        float slingshotWidth = slingshot.getSlingshot_texture().getWidth() * (slingshotHeight / slingshot.getSlingshot_texture().getHeight()); // Scale width based on height
 
         // Draw the slingshot at (125, 55) with a height of 75 and scaled width
-        batch.draw(slingshotTexture, slingshotX, slingshotY, slingshotWidth, slingshotHeight);
+        batch.draw(slingshot.getSlingshot_texture(), slingshotX, slingshotY, slingshotWidth, slingshotHeight);
 
         batch.draw(redbirdTexture, 100, 55, 25, 25);
         batch.draw(redbirdTexture, 70, 55, 25, 25);
@@ -105,30 +133,43 @@ public class Level1 implements Screen {
 
         batch.draw(kingpigTexture, 502, 125, 30, 30);
         batch.draw(kingpigTexture, 572, 125, 30, 30);
+
+        // DRAWING THE BIRD
+        Vector2 bird_position = bird.getBirdBody().getPosition();
+        batch.draw(bird.getBirdImage(),
+            (bird_position.x*PPM) - bird.get_radius()*PPM, (bird_position.y*PPM) - bird.get_radius()*PPM,
+            2*bird.get_radius()*PPM, 2*bird.get_radius()*PPM);
+
         batch.end();
+
+        LevelScreen.debugRenderer.render(world, camera.combined);
 
         stage.act(delta);                                               // for buttons
         stage.draw();
 
+
         if (pausebutton.isPressed()) {
             // Switch to PauseButton class
-            game.setScreen(new PausePage(game, current_player));
+            game.setScreen(new PausePage(game, current_player, this, world, slingshot));
         }
 
-        /*
-        For STATIC GUI:
-        1. ENTER: WIN
-        2. SPACE: LOSS
-        */
         if (Gdx.input.isKeyJustPressed(Input.Keys.ENTER)) {
-            // Set the screen to VictoryScreen
-            game.setScreen(new VictoryScreen(game, current_player));
+            // Set the screen to VictoryScreen, increment levels_cleared using victory()
+            current_player.victory();
+            game.setScreen(new VictoryScreen(game, current_player, world, slingshot));
         }
 
         if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
-            // Set the screen to VictoryScreen
-            game.setScreen(new LostScreen(game, current_player));
+            // set the screen to LostScreen
+            game.setScreen(new LostScreen(game, current_player, world, slingshot));
         }
+    }
+
+    public void setBirds() {
+        // CHANGE THE TYPE OF BIRDS LATER
+        this.birds.add(new RedBird());
+        this.birds.add(new RedBird());
+        this.birds.add(new RedBird());
     }
 
     @Override
@@ -149,11 +190,13 @@ public class Level1 implements Screen {
     public void dispose() {
         batch.dispose();
         backgroundTexture.dispose();
-        slingshotTexture.dispose();
         redbirdTexture.dispose();
         kingpigTexture.dispose();
         woodblockTexture.dispose();
         pausebuttonTexture.dispose();
         stage.dispose();
+        if (bird.getCircle() != null) {
+            bird.getCircle().dispose();
+        }
     }
 }
