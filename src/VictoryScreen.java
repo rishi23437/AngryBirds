@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
@@ -38,9 +39,14 @@ public class VictoryScreen implements Screen {
 
     private Player current_player;
 
-    public VictoryScreen(MainGame game, Player player) {
+    private Slingshot slingshot;
+    private World world;
+
+    public VictoryScreen(MainGame game, Player player, World world, Slingshot slingshot) {
         this.game = game;
         this.current_player = player;
+        this.world = world;
+        this.slingshot = slingshot;
     }
 
     @Override
@@ -115,18 +121,18 @@ public class VictoryScreen implements Screen {
         stage.draw();
 
         if (exitbutton.isPressed()) {
-            // Switch to PauseButton class
+            // Switch to levelscreen
             game.setScreen(new LevelScreen(game, current_player));
         }
 
         if (restartbutton.isPressed()) {
-            // Switch to PauseButton class
-            game.setScreen(new Level1(game, current_player));
+            // restart the game
+            game.setScreen(new Level1(game, current_player, world, slingshot));
         }
 
         if (nextbutton.isPressed()) {
-            // Switch to NextButton class
-            game.setScreen(new Level1(game, current_player));
+            // currently switching to Level1, SWITCH to NEXT LEVEL LATER
+            game.setScreen(new Level1(game, current_player, world, slingshot));
         }
     }
 
