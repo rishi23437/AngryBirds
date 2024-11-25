@@ -44,3 +44,5 @@ This is done through SignIn page
 
 ## Utilities Folder:
 - Not required in code, just contains some UI components which may be useful for creating other components
+
+## changes in the VictoryScreen and the LostScreen and in Level1 have been made
