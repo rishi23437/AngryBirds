@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
@@ -33,9 +34,14 @@ public class LostScreen implements Screen {
 
     private Player current_player;
 
-    public LostScreen(MainGame game, Player player) {
+    private Slingshot slingshot;
+    private World world;
+
+    public LostScreen(MainGame game, Player player,World world, Slingshot slingshot) {
         this.game = game;
         this.current_player = player;
+        this.world = world;
+        this.slingshot = slingshot;
     }
 
     @Override
@@ -103,7 +109,7 @@ public class LostScreen implements Screen {
 
         if (restartbutton.isPressed()) {
             // Switch to PauseButton class
-            game.setScreen(new Level1(game, current_player));
+            game.setScreen(new Level1(game, current_player, world, slingshot));
         }
     }
 
