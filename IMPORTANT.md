@@ -1,4 +1,23 @@
 # ALL IMPORTANT NOTES
+
+## Tasks remaining
+- 3 types of birds: Implement 2 others(black and yellow)
+- 3 types of blocks: wood, glass, steel
+- 3 different levels: Level2, Level3 banao
+- Collision Handling
+- Serializable se save karo
+- JUnit Testing
+- Make UI buttons login and signup
+- Introduce friction to stop a bird on the ground(after it has been launched)
+- Music 
+- Update README
+- Demo video
+
+If time permits:
+- Special power for birds
+
+
+
 ## LAST DEADLINE
 ### Supporting Different Users by making login and signup, for BONUS.
 This is done through SignIn page 
@@ -9,8 +28,26 @@ This is done through SignIn page
 - Change background image, and image buttons(play -> login, quit -> signup)
 - Change UI part of text fields
 - See if prompt can be centered
+- Clear the text in username and password fields after the login/signup process
 #### Things to keep in mind:
 - After login/signup, I have the Player object of the player(which includes all player details including username, password, levels cleared, etc). I think we have to pass this player object to the HomePage and all the other pages. Then we would be able to update the state of the player.
+
+
+
+## Current Tasks
+- Slingshot and Bird movement
+  - set bird position to slingshot release point: slingshot ko Body do, static body ---------------------------------------- DONE
+  - implement bird queue, reset current bird and its position when previous bird is disposed ------------------------------- DONE
+  - for every bird, introduce a variable called hasBeenTouched - a bird can only be touched once
+
+
+
+## Things to do
+- Add references and sources in Readme. Angrybirds official website for assets, libgdx documentation, box2d documentation, etc
+
+## Notes
+### Box2D
+- uses SI units for quantities. So, metres, seconds, Newtons. It is not pixel-based. Hence, conversion is needed
 
 
 
@@ -44,5 +81,3 @@ This is done through SignIn page
 
 ## Utilities Folder:
 - Not required in code, just contains some UI components which may be useful for creating other components
-
-## changes in the VictoryScreen and the LostScreen and in Level1 have been made
