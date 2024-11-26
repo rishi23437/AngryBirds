@@ -7,6 +7,9 @@ public class Player {
     private String username;
     private String password;
 
+    // update this everytime the player CLEARS a level(just before victory screen is displayed)
+    private int levels_cleared;
+
     // list of all players. Sign up new players here, search new players while logging in from here
     private static ArrayList<Player> players = new ArrayList<Player>();
 
@@ -14,6 +17,7 @@ public class Player {
         // MODIFY OTHER FIELDS(like levels cleared, among others) LATER(when you declare them) in the constructor
         this.username = username;
         this.password = password;
+        this.levels_cleared = 0;
     }
 
     public static Player login(String username, String password) {
@@ -37,5 +41,9 @@ public class Player {
         Player new_player = new Player(username, password);
         players.add(new_player);
         return new_player;
+    }
+
+    public void victory() {
+        levels_cleared++;
     }
 }

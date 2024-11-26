@@ -9,7 +9,6 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
@@ -22,7 +21,7 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import java.util.ArrayList;
 import java.util.LinkedList;
 
-public class Level1 extends Level implements Screen {
+public class RandomLevel extends Level implements Screen {
     private SpriteBatch batch;
 
     private Texture backgroundTexture;
@@ -53,8 +52,7 @@ public class Level1 extends Level implements Screen {
     public ArrayList<Block> blocks;
     Block temp_block;
 
-
-    public Level1(MainGame game, Player player, Slingshot slingshot) {
+    public RandomLevel(MainGame game, Player player, Slingshot slingshot) {
         this.game = game;                           // Store the reference to MainGame
         this.current_player = player;
         this.slingshot = slingshot;
@@ -64,12 +62,8 @@ public class Level1 extends Level implements Screen {
     public void show() {
         batch = new SpriteBatch();
         backgroundTexture = new Texture("Level_1images/Background1.png");
-        redbirdTexture = new Texture("Level_1images/redBird.png");
-        woodblockTexture = new Texture("Level_1images/woodblock.png");
-        kingpigTexture = new Texture("Level_1images/kingpig.png");
 
         world = new World(new Vector2(0, -10), true);
-//        debugRenderer = new Box2DDebugRenderer();
 
         camera = new OrthographicCamera();
         viewport = new FitViewport(640, 380, camera);
@@ -77,25 +71,12 @@ public class Level1 extends Level implements Screen {
         stage = new Stage(viewport, batch);
         Gdx.input.setInputProcessor(stage);
 
-
-        // TESTING
         birds = new LinkedList<>();
         this.setBirds();
         slingshot.setBird_list(birds);
         bird = slingshot.getCurrent_bird();
-//        this.create(world, camera);
         create_ground(world, camera);
         bird.create(world);
-        slingshot.create(world);
-
-        blocks = new ArrayList<>();
-        this.setBlocks();
-        temp_block=blocks.getFirst(); temp_block.create(world, 500, 55, 35, 35);
-
-        temp_block=blocks.get(1); temp_block.create(world, 535, 55,35,35);
-        temp_block=blocks.get(2); temp_block.create(world, 570, 55, 35, 35);
-        temp_block=blocks.get(3); temp_block.create(world, 500, 90, 35, 35);
-        temp_block=blocks.get(4); temp_block.create(world, 570, 90,35,35);
 
 
         pausebuttonTexture = new Texture("Level_1images/pausebutton.png");
@@ -107,7 +88,6 @@ public class Level1 extends Level implements Screen {
         pausebutton.addListener(new ClickListener());
     }
 
-
     @Override
     public void render(float delta) {
         ScreenUtils.clear(Color.BLACK);
@@ -117,19 +97,6 @@ public class Level1 extends Level implements Screen {
         if (!paused) {
             world.step(1 / 60f, 6, 2);
         }
-
-        //        if (Gdx.input.isTouched()) {
-//            // Get screen coordinates (in pixels)
-//            float screenX = Gdx.input.getX();
-//            float screenY = Gdx.input.getY();
-//
-//            // Convert screen coordinates to world coordinates
-//            Vector2 worldCoordinates = new Vector2(screenX, screenY);
-//            viewport.unproject(worldCoordinates);
-//
-//            // Print world coordinates to the console
-//            System.out.println("Cursor Location - X: " + worldCoordinates.x + ", Y: " + worldCoordinates.y);
-//        }
 
         batch.begin();
         float world_width = viewport.getWorldWidth();
@@ -145,77 +112,19 @@ public class Level1 extends Level implements Screen {
         // Draw the slingshot at (125, 55) with a height of 75 and scaled width
         batch.draw(slingshot.getSlingshot_texture(), slingshotX, slingshotY, slingshotWidth, slingshotHeight);
 
-        batch.draw(redbirdTexture, 100, 55, 25, 25);
-        batch.draw(redbirdTexture, 70, 55, 25, 25);
-
-//        batch.draw(woodblockTexture, 500, 55, 35, 35);
-//        batch.draw(woodblockTexture, 535, 55, 35, 35);
-//        batch.draw(woodblockTexture, 570, 55, 35, 35);
-//        batch.draw(woodblockTexture, 500, 90, 35, 35);
-//        batch.draw(woodblockTexture, 570, 90, 35, 35);
-
-        batch.draw(kingpigTexture, 502, 125, 30, 30);
-        batch.draw(kingpigTexture, 572, 125, 30, 30);
-
-        // DRAWING THE BIRD
         Vector2 bird_position = bird.getBirdBody().getPosition();
         batch.draw(bird.getBirdImage(),
             (bird_position.x*PPM) - bird.get_radius()*PPM,
             (bird_position.y*PPM) - bird.get_radius()*PPM,
             2*bird.get_radius()*PPM, 2*bird.get_radius()*PPM);
 
-        temp_block = blocks.getFirst(); Vector2 block_position = temp_block.getBlockBody().getPosition();
-        batch.draw(
-            temp_block.getBlockImage(),
-            (block_position.x * Level.PPM) - (temp_block.getwidth() / 2),
-            (block_position.y * Level.PPM) - (temp_block.getheight() / 2),
-            temp_block.getwidth(),
-            temp_block.getheight()
-        );
-
-        temp_block = blocks.get(1); block_position = temp_block.getBlockBody().getPosition();
-        batch.draw(
-            temp_block.getBlockImage(),
-            (block_position.x * Level.PPM) - (temp_block.getwidth() / 2),
-            (block_position.y * Level.PPM) - (temp_block.getheight() / 2),
-            temp_block.getwidth(),
-            temp_block.getheight()
-        );
-
-        temp_block = blocks.get(2); block_position = temp_block.getBlockBody().getPosition();
-        batch.draw(
-            temp_block.getBlockImage(),
-            (block_position.x * Level.PPM) - (temp_block.getwidth() / 2),
-            (block_position.y * Level.PPM) - (temp_block.getheight() / 2),
-            temp_block.getwidth(),
-            temp_block.getheight()
-        );
-
-        temp_block = blocks.get(3); block_position = temp_block.getBlockBody().getPosition();
-        batch.draw(
-            temp_block.getBlockImage(),
-            (block_position.x * Level.PPM) - (temp_block.getwidth() / 2),
-            (block_position.y * Level.PPM) - (temp_block.getheight() / 2),
-            temp_block.getwidth(),
-            temp_block.getheight()
-        );
-
-        temp_block = blocks.get(4); block_position = temp_block.getBlockBody().getPosition();
-        batch.draw(
-            temp_block.getBlockImage(),
-            (block_position.x * Level.PPM) - (temp_block.getwidth() / 2),
-            (block_position.y * Level.PPM) - (temp_block.getheight() / 2),
-            temp_block.getwidth(),
-            temp_block.getheight()
-        );
-
         batch.end();
 
         LevelScreen.debugRenderer.render(world, camera.combined);
 
+//        float delta;
         stage.act(delta);                                               // for buttons
         stage.draw();
-
 
         if (pausebutton.isPressed()) {
 //            paused = true; // Pause the game
@@ -232,50 +141,11 @@ public class Level1 extends Level implements Screen {
             // set the screen to LostScreen
             game.setScreen(new LostScreen(game, current_player, slingshot));
         }
-
-        handleInput();
-
-        // destroying body of current bird when the conditions are met
-        // CONDITIONS: bird out of viewport range(no condition for negative-y), bird health = 0, bird movement 0
-        // IMPLEMENT THE NEXT 2 AFTERWARDS
-        Vector2 curr_bird_position = bird.getBirdBody().getPosition();
-        if (curr_bird_position.x > 640/Level.PPM || curr_bird_position.x < 0/Level.PPM || curr_bird_position.y > 380/Level.PPM) {
-            dispose_bird(bird);
-
-            // bird should refer to the next bird now
-            bird = slingshot.set_next_bird();                                       // does poll
-            if (bird == null) {
-                // if all birds are finished, then game is lost
-                game.setScreen(new LostScreen(game, current_player, slingshot));
-                return;
-            }
-            bird.create(world);
-        }
     }
 
     public void setBirds() {
         // CHANGE THE TYPE OF BIRDS LATER
-        // Use while restarting too
-        this.birds.clear();
         this.birds.add(new RedBird());
-        this.birds.add(new RedBird());
-        this.birds.add(new RedBird());
-    }
-
-    public void dispose_bird(Bird bird) {
-        // YOU CAN USE THIS FOR JUNIT TESTING
-        if (bird.getBirdBody() != null) {
-            world.destroyBody(bird.getBirdBody());
-            System.out.println("Bird body disposed.");
-        }
-    }
-
-    private void setBlocks() {
-        this.blocks.add(new Block("Level_1images/woodblock.png",1));
-        this.blocks.add(new Block("Level_1images/woodblock.png",1));
-        this.blocks.add(new Block("Level_1images/woodblock.png",1));
-        this.blocks.add(new Block("Level_1images/woodblock.png",1));
-        this.blocks.add(new Block("Level_1images/woodblock.png",1));
     }
 
     private void handleInput() {
@@ -286,9 +156,8 @@ public class Level1 extends Level implements Screen {
                 if (!dragging) {
                     Vector2 birdPosition = bird.getBirdBody().getPosition().scl(Level.PPM);
                     float birdRadius = bird.get_radius() * Level.PPM;
-                    if (mousePosition.dst(birdPosition) <= birdRadius && !bird.get_HasBeenTouched()) {
+                    if (mousePosition.dst(birdPosition) <= birdRadius) {
                         dragging = true;
-                        bird.set_HasBeenTouched(true);
                         dragStartPosition = mousePosition;
                     }
                 } else {
@@ -298,13 +167,13 @@ public class Level1 extends Level implements Screen {
                 // Release the bird
                 dragging = false;
 
-                 //Calculate release force
+                //Calculate release force
                 Vector2 releaseForce;
                 if(currentMousePosition.dst(dragStartPosition) > 96f) {
                     releaseForce = (dragStartPosition.sub(currentMousePosition)).nor().scl(8f);
                 }
                 else{
-                     releaseForce = dragStartPosition.sub(currentMousePosition).scl(0.1f);
+                    releaseForce = dragStartPosition.sub(currentMousePosition).scl(0.1f);
                 }
                 //System.out.println(dragStartPosition.sub(currentMousePosition)+"  "+(currentMousePosition.dst(dragStartPosition));
 //                Vector2 releaseForce = dragStartPosition.sub(currentMousePosition).scl(0.1f); // Adjust force scaling
@@ -315,39 +184,28 @@ public class Level1 extends Level implements Screen {
         }
     }
 
-
-
     @Override
     public void resize(int width, int height) {
         viewport.update(width, height, true);
     }
 
     @Override
-    public void pause() { }
+    public void pause() {
 
-    @Override
-    public void resume() { }
-
-    @Override
-    public void hide() { }
-
-    public void setPaused(boolean paused) {
-        this.paused = paused;
     }
 
+    @Override
+    public void resume() {
+
+    }
+
+    @Override
+    public void hide() {
+
+    }
 
     @Override
     public void dispose() {
-        batch.dispose();
-        backgroundTexture.dispose();
-        redbirdTexture.dispose();
-        kingpigTexture.dispose();
-        woodblockTexture.dispose();
-        pausebuttonTexture.dispose();
-        stage.dispose();
-        if (bird.getCircle() != null) {
-            bird.getCircle().dispose();
-        }
-//        debugRenderer.dispose();
+
     }
 }

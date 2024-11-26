@@ -4,6 +4,9 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
+import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
@@ -33,9 +36,16 @@ public class LevelScreen implements Screen{
 
     private Player current_player;
 
+    private World world;
+    public static Box2DDebugRenderer debugRenderer;
+
+    private Slingshot slingshot;
+
+
     public LevelScreen(MainGame game, Player player) {
         this.game = game;
         this.current_player = player;
+        this.slingshot = new Slingshot("Level_1images/slingshot.png");
     }
 
     @Override
@@ -45,6 +55,16 @@ public class LevelScreen implements Screen{
 
         stage = new Stage(viewport, batch);
         Gdx.input.setInputProcessor(stage);
+
+        /*
+        World() takes 2 params:
+        1. A vector for Gravity. It has x and y coords(therefore vector2). Here, y = -10 because gravity is
+        10m/s^2 in negative y-direction. x = 0.
+        2. doSleep(boolean): if true, bodies are allowed to sleep, computations do not occur every second
+        */
+        world = new World(new Vector2(0, -10), true);
+        world.setVelocityThreshold(0.01f);
+        debugRenderer = new Box2DDebugRenderer();
 
         background = new Texture("level_screen.png");
         map_text = new Texture("map_brown.png");
@@ -109,7 +129,7 @@ public class LevelScreen implements Screen{
         // Level 1 is pressed
         else if (level1_button.isPressed()) {
             // switching to Level 1
-            game.setScreen((Screen) new Level_1(game, current_player));
+            game.setScreen((Screen) new Level1(game, current_player, slingshot));
         }
 
     }

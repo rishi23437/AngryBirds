@@ -37,10 +37,10 @@ public class LostScreen implements Screen {
     private Slingshot slingshot;
     private World world;
 
-    public LostScreen(MainGame game, Player player,World world, Slingshot slingshot) {
+    public LostScreen(MainGame game, Player player, Slingshot slingshot) {
         this.game = game;
         this.current_player = player;
-        this.world = world;
+//        this.world = world;
         this.slingshot = slingshot;
     }
 
@@ -109,7 +109,7 @@ public class LostScreen implements Screen {
 
         if (restartbutton.isPressed()) {
             // Switch to PauseButton class
-            game.setScreen(new Level1(game, current_player, world, slingshot));
+            game.setScreen(new Level1(game, current_player, slingshot));
         }
     }
 

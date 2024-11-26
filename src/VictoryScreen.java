@@ -42,10 +42,10 @@ public class VictoryScreen implements Screen {
     private Slingshot slingshot;
     private World world;
 
-    public VictoryScreen(MainGame game, Player player, World world, Slingshot slingshot) {
+    public VictoryScreen(MainGame game, Player player, Slingshot slingshot) {
         this.game = game;
         this.current_player = player;
-        this.world = world;
+//        this.world = world;
         this.slingshot = slingshot;
     }
 
@@ -127,12 +127,12 @@ public class VictoryScreen implements Screen {
 
         if (restartbutton.isPressed()) {
             // restart the game
-            game.setScreen(new Level1(game, current_player, world, slingshot));
+            game.setScreen(new Level1(game, current_player, slingshot));
         }
 
         if (nextbutton.isPressed()) {
             // currently switching to Level1, SWITCH to NEXT LEVEL LATER
-            game.setScreen(new Level1(game, current_player, world, slingshot));
+            game.setScreen(new Level1(game, current_player, slingshot));
         }
     }
 

@@ -1,12 +1,12 @@
 package io.github.angry_birds;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
@@ -34,10 +34,17 @@ public class PausePage implements Screen {
 
     private Player current_player;
 
+    private Level existing_level;
+    private Slingshot slingshot;
+    private World world;
 
-    public PausePage(MainGame game, Player player) {
+
+    public PausePage(MainGame game, Player player, Level level, Slingshot slingshot) {
         this.game = game;
         this.current_player = player;
+        this.existing_level = level;
+//        this.world = world;
+        this.slingshot = slingshot;
     }
 
     @Override
@@ -109,13 +116,25 @@ public class PausePage implements Screen {
         stage.draw();
 
         if (resumebutton.isPressed()) {
-            // Switch to PauseButton class
-            game.setScreen(new Level_1(game, current_player));
+            // switch to the level which called PausePage, using existing_level
+            // the screen should automatically switch to the specific level
+            game.setScreen(existing_level);
         }
+//        if (resumebutton.isPressed()) {
+//            if (existing_level instanceof Level1) {
+//                ((Level1) existing_level).setPaused(false); // Unpause the level
+//            }
+//            game.setScreen(existing_level);
+//        }
+
 
         if (restartbutton.isPressed()) {
-            // Switch to PauseButton class
-            game.setScreen(new Level_1(game, current_player));
+            // switch to the level which called PausePage, by creating a new instance of it
+            // RESET SLINGSHOT BIRD LIST
+            if (existing_level instanceof Level1) {
+                existing_level.dispose();
+                game.setScreen((Screen) new Level1(game, current_player, slingshot));
+            }
         }
 
         if (exitbutton.isPressed()) {

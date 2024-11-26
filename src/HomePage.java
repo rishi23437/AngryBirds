@@ -114,6 +114,10 @@ public class HomePage implements Screen {
     public void dispose() {
         batch.dispose();
         background.dispose();
+        header.dispose();
+        red_bird_image.dispose();
+        play_image.dispose();
+        quit_image.dispose();
         stage.dispose();
     }
 }
