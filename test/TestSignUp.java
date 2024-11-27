@@ -6,7 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 
 public class TestSignUp {
     @Test
-    public void testLogin() {
+    public void testSignUp() {
         Player result1 = Player.signup("rishi", "pass");
         Player result2 = Player.signup("sahas", "555555");
         Player result3 = Player.signup("mendhak", "frog");
