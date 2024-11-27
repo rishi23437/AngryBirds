@@ -1,20 +1,26 @@
 # ALL IMPORTANT NOTES
 
 ## Tasks remaining
-- 3 types of birds: Implement 2 others(black and yellow)
-- 3 types of blocks: wood, glass, steel
-- 3 different levels: Level2, Level3 banao
-- Collision Handling
-- Serializable se save karo
+- 3 types of birds: Implement 2 others(black and yellow) --------------------------------------- DONE
+- 3 types of blocks: wood, ice, metal
+- 3 different levels: Level2, Level3 banao ----------------------------------------------------- DONE
+- Collision Handling --------------------------------------------------------------------------- DONE
+- Resume button
+- Pause button
+- Serializable se save karo, multiple players ka data
 - JUnit Testing
-- Make UI buttons login and signup
+- Make UI buttons login and signup -------------------------------------------------------------- DONE
 - Introduce friction to stop a bird on the ground(after it has been launched)
 - Music 
 - Update README
 - Demo video
+- Sample saved game(play the game, close and write in json, upload json file also)
+- UML class(from intellij) and Use case diagrams
 
-If time permits:
+If time permits(OTHER FEATURES - IMPLEMENT THESE, ab toh time hai):
 - Special power for birds
+- Slingshot trajectory shadow
+- Player profiles
 
 
 
@@ -38,7 +44,7 @@ This is done through SignIn page
 - Slingshot and Bird movement
   - set bird position to slingshot release point: slingshot ko Body do, static body ---------------------------------------- DONE
   - implement bird queue, reset current bird and its position when previous bird is disposed ------------------------------- DONE
-  - for every bird, introduce a variable called hasBeenTouched - a bird can only be touched once
+  - for every bird, introduce a variable called hasBeenTouched - a bird can only be touched once --------------------------- DONE
 
 
 
