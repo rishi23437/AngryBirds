@@ -2,7 +2,7 @@
 This project is an Angry Birds clone in java, which we made as a part of our Advanced Programming course. 
 
 ## Description
-The game has all the basic features of any Angry Birds game implemented. It has 3 main levels, along with an infinite level generator. The application is object-oriented, and uses Serialization to save and restore game states from a .json file. Multiple players are supported, and each player can save 1 game state of theirs. This project also contains a few JUnit tests.
+The game has all the basic features of any Angry Birds game. It has 3 main levels, along with an infinite level generator. The application is object-oriented, and uses Serialization to save and restore game states from a .json file. Multiple players are supported, and each player can save 1 game state of theirs. This project also contains a few JUnit tests.
 
 ## Set up and Run
 ### IntelliJ Idea
