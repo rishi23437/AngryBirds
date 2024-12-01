@@ -6,7 +6,7 @@ The game has all the basic features of any Angry Birds game. It has 3 main level
 
 ## Set up and Run
 ### IntelliJ Idea
-- To run the project using IntelliJ Idea, download the project folder - 2023437_2023460 - and place it in the folder where you run your other IntelliJ projects(could be called IdeaProjects for some people). Then, you can run it normally on IntelliJ!
+- To run the project using IntelliJ Idea, download the project folder and place it in the folder where you run your other IntelliJ projects(could be called IdeaProjects for some people). Then, you can run it normally on IntelliJ!
 - To run the JUnit tests, after setting up the project as mentioned above, open the core/src/test/java/io/github/angry_birds directory. There are 3 JUnit tests, each of which can be run normally on IntelliJ!
 
 ## Platforms
