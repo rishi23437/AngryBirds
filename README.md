@@ -1,4 +1,4 @@
-# AngryBirds - by TheVoid
+# AngryBirds
 This project is an Angry Birds clone in java, which we made as a part of our Advanced Programming course. 
 
 ## Description
@@ -29,7 +29,7 @@ The Gradle wrapper was included, so you can run Gradle tasks using `gradlew.bat`
 - Additionally as mentioned above, they can save the game state of a particular level.
 - Sample game states are saved in the saved_game_states.json file of the data_files directory.
 
-## References
+## Credits
 The following websites/tutorials have helped us tremendously in understanding libGDX and the project, and guided us towards making the game:
 - [libGDX Documentation](https://libgdx.com/wiki/)
 - [libGDX Simple Game](https://libgdx.com/wiki/start/a-simple-game)
